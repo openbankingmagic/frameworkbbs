@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyw.bbs.mapper.BoardMapper">
+  <select id="getList" resultType="com.jw.bbs.dto.BoardVO">
+    select * from board
+  </select>
+</mapper>

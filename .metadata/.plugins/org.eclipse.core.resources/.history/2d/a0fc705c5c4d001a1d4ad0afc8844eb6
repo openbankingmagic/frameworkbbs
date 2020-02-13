@@ -1,0 +1,49 @@
+package com.jyw.bbs;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.net.ssl.SSLSession;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.jyw.bbs.dto.BoardVO;
+import com.jyw.bbs.mapper.BoardMapper;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+public class DBTest {
+	@Inject
+	private SqlSessionFactory sqlFactory;
+	
+	@Inject
+	private BoardMapper mapper;
+	
+	public void testGetList() {
+		// 컬렉션 결과에서 한개씩 가져와서 보드란 변수에 할당하고 리스트니까 랭스가 아니고 사이즈
+		// 리스트에 가져온값을 가져오면 보드값이 된다 투스트링 결과가 나올거다.
+		List<BoardVO> list=mapper.getList();
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+	}
+	
+	@Test
+	public void testFactory() {
+		System.out.println(">>>>>>sqlFactory: "+sqlFactory);
+	}
+	
+	@Test
+	public void testSession() throws Exception{
+		try (SqlSession session = sqlFactory.openSession()){
+				System.out.println(">>>>> session : "+session+"\n");;
+			}catch(Exception e) {
+				e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,35 @@
+package com.jyw.bbs.controller;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.jyw.bbs.dto.BoardVO;
+import com.jyw.bbs.service.BoardService;
+
+@Controller
+public class BoardController {
+	@Inject
+	BoardService service;
+	
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+		model.addAttribute("list", service.selectAll());
+		return "list";
+	}
+	
+	@GetMapping("/input")
+	public String insert() {
+		return "input";
+	}
+	@PostMapping("/input")
+	public String insert(@ModelAttribute("board") BoardVO board) {
+		return "redirect:list";
+	}
+}
