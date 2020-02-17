@@ -30,6 +30,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO selectOne(int bno) {
 		// TODO Auto-generated method stub
+		mapper.updateReadCount(bno);
 		return mapper.read(bno);
 	}
 
@@ -54,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int totalCount(Criteria cri) {
 		// TODO Auto-generated method stub
-		return mapper.totalCount();
+		return mapper.totalCount(cri);
 	}
 
 }

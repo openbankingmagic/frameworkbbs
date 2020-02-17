@@ -2,6 +2,8 @@ package com.jyw.bbs.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jyw.bbs.dto.BoardVO;
 import com.jyw.bbs.dto.Criteria;
 
@@ -14,5 +16,6 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 	public void updateReadCount(int bno);
 	public List<BoardVO> oraListPaging(Criteria cri);
-	public int totalCount();
+	public int totalCount(Criteria cri);
+	public void updateReplyCount(@Param("amount")int amount, @Param("bno")int bno);
 }

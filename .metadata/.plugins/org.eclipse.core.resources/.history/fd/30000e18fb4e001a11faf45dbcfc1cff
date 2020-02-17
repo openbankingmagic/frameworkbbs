@@ -1,0 +1,35 @@
+package com.jyw.bbs.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import com.jyw.bbs.dto.RepleVO;
+import com.jyw.bbs.mapper.BoardMapper;
+import com.jyw.bbs.mapper.RepleMapper;
+
+
+public class RepleServiceImpl implements RepleService {
+	@Inject
+	private RepleMapper repleMapper;
+	@Inject
+	private BoardMapper boardMapper;
+	@Override
+	public void register(RepleVO reple) {
+		// TODO Auto-generated method stub
+		boardMapper.updateRepleCount(1, reple.getBno());
+	}
+
+	@Override
+	public List<RepleVO> getList(int bno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove(int rno) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

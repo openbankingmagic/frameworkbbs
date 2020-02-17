@@ -1,0 +1,27 @@
+package com.jyw.bbs.service;
+
+import java.util.List;
+
+import com.jyw.bbs.dto.RepleVO;
+
+public class RepleServiceImpl implements RepleService {
+
+	@Override
+	public void register(RepleVO reple) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<RepleVO> getList(int bno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove(int rno) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

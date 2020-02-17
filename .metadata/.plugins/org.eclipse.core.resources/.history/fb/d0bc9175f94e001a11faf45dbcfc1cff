@@ -1,0 +1,5 @@
+package com.jyw.bbs.service;
+
+public interface RepleService {
+
+}

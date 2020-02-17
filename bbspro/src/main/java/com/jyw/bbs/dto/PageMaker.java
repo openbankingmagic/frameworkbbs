@@ -26,7 +26,8 @@ public class PageMaker {
 		
 		if(endPage>tendPage) endPage=tendPage;
 		prev=startPage==1?false:true;
-		next=endPage*cri.getPerPageNum()>=totalCount?false:true;
+		//next=endPage*cri.getPerPageNum()>=totalCount?false:true;
+		next=endPage>=tendPage?false:true;
 	}
 
 	public int getStartPage() {

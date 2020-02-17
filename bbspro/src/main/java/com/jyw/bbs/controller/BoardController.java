@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jyw.bbs.dto.BoardVO;
 import com.jyw.bbs.dto.Criteria;
@@ -27,6 +28,11 @@ public class BoardController {
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(totalCount);
+		
+		System.out.println(model);
+		System.out.println(cri);
+		System.out.println("cri getKeyword:"+cri.getKeyword());
+		System.out.println("cri getType:"+cri.getType());
 
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("list", service.selectAll(cri));
@@ -45,19 +51,32 @@ public class BoardController {
 	
 	// 폼에 들어갈땐 모델이 있어야 된다.
 	@GetMapping("/update")
-	public String update(@RequestParam("bno") int bno, Model model) {
+	public String update(@ModelAttribute("cri") Criteria cri, @RequestParam("bno") int bno, Model model) {
 		model.addAttribute("board", service.selectOne(bno));
 		return "update";
 		// 업데이트란 논리뷰로 넣어줘라
 	}
 	@PostMapping("/update")
-	public String update(@ModelAttribute("board") BoardVO board) {
+	public String update(@ModelAttribute("board") BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		service.update(board);
+		
+		rttr.addAttribute("page", cri.getPage());
+		System.out.println("rttr:"+rttr);
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		System.out.println("cri:"+cri);
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		return "redirect:list";
 	}
 	@GetMapping("/delete")
-	public String delete(@RequestParam("bno") int bno) {
+	public String delete(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		service.delete(bno);
+		rttr.addAttribute("page", cri.getPage());
+		System.out.println("rttr:"+rttr);
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:list";
 	}
 }

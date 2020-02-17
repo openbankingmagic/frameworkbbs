@@ -1,0 +1,5 @@
+package com.jyw.bbs.dto;
+
+public class RepleVO {
+
+}
